@@ -1,0 +1,42 @@
+plugins {
+    id 'java'
+}
+
+group = 'com.ptc'
+version = '1.0.0'
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compileOnly fileTree(dir: 'lib/thingworx-sdk', include: ['*.jar'])
+    testImplementation fileTree(dir: 'lib/thingworx-sdk', include: ['*.jar'])
+
+    implementation 'commons-net:commons-net:3.9.0'
+    implementation 'com.jcraft:jsch:0.1.55'
+
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.mockftpserver:MockFtpServer:2.8.0'
+    testImplementation 'org.apache.sshd:sshd-core:2.12.0'
+    testImplementation 'org.apache.sshd:sshd-sftp:2.12.0'
+    testImplementation 'org.apache.sshd:sshd-common:2.12.0'
+    testImplementation 'org.slf4j:slf4j-simple:1.7.36'
+}
+
+task buildExtension(type: Zip, dependsOn: jar) {
+    archiveFileName = "FTPWidget-${project.version}.zip"
+    destinationDirectory = file("$buildDir/extension")
+
+    from('metadata.xml')
+
+    into('lib') {
+        from configurations.runtimeClasspath.filter { file ->
+            !file.name.startsWith('slf4j-api') &&
+            !file.name.startsWith('slf4j-simple')
+        }
+        from jar.archiveFile
+    }
+}

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Entities>
+  <ExtensionPackages>
+    <ExtensionPackage name="FTPWidgetExtension"
+                      description="FTP/FTPS/SFTP file transfer extension for ThingWorx"
+                      vendor="PTC"
+                      packageVersion="1.0.0"
+                      minimumThingWorxVersion="8.0.0">
+      <JARResources>
+        <FileResource type="JAR" file="lib/FTPWidget-1.0.0.jar"/>
+        <FileResource type="JAR" file="lib/commons-net-3.9.0.jar"/>
+        <FileResource type="JAR" file="lib/jsch-0.1.55.jar"/>
+      </JARResources>
+    </ExtensionPackage>
+  </ExtensionPackages>
+</Entities>

@@ -1,0 +1,10 @@
+Copy these JARs here from your ThingWorx server installation at:
+<ThingWorx-install>/ThingWorx/WEB-INF/lib/
+
+Required JARs:
+- Thingworx.Foundation-*.jar
+- log4j-*.jar
+- slf4j-api-*.jar
+
+These are compileOnly — they will NOT be bundled in the extension zip.
+They are required before Task 6 (FTPConnectionThing) can be compiled.
