@@ -10,3 +10,6 @@ build/
 # OS files
 .DS_Store
 Thumbs.db
+
+# ThingWorx SDK JARs (large proprietary binaries)
+lib/thingworx-sdk/*.jar
