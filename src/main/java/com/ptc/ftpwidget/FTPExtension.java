@@ -1,6 +1,6 @@
 package com.ptc.ftpwidget;
 
-import com.thingworx.packaging.ExtensionPackage;
+import com.thingworx.extensibility.ExtensionPackage;
 
 public class FTPExtension extends ExtensionPackage {
 }
