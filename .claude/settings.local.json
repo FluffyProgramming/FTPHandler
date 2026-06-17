@@ -1,0 +1,33 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/dswint/.claude/plugins/cache/superpowers-dev/superpowers/5.0.6/skills/subagent-driven-development/**)",
+      "Bash(git init *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git checkout *)",
+      "PowerShell(gradle --version 2>&1)",
+      "PowerShell(New-Item -ItemType Directory -Force \"c:\\\\Users\\\\dswint\\\\OneDrive - PTC\\\\Documents\\\\FTPWidget\\\\src\\\\main\\\\java\\\\com\\\\ptc\\\\ftpwidget\")",
+      "PowerShell(New-Item -ItemType Directory -Force \"c:\\\\Users\\\\dswint\\\\OneDrive - PTC\\\\Documents\\\\FTPWidget\\\\src\\\\test\\\\java\\\\com\\\\ptc\\\\ftpwidget\")",
+      "PowerShell(New-Item -ItemType Directory -Force \"c:\\\\Users\\\\dswint\\\\OneDrive - PTC\\\\Documents\\\\FTPWidget\\\\lib\\\\thingworx-sdk\")",
+      "Bash(git log *)",
+      "Bash(git check-ignore *)",
+      "Bash(echo \"exit: $?\")",
+      "Bash(./gradlew compileJava)",
+      "Bash(./gradlew test *)",
+      "Bash(./gradlew clean *)",
+      "Bash(git diff *)",
+      "Bash(git filter-branch -f --env-filter ' *)",
+      "Bash(xargs -n 1 git update-ref -d)",
+      "Bash(git reflog *)",
+      "Bash(git gc *)",
+      "Bash(ls \"C:/Users/dswint/Downloads/MED-61098-CD-097_9-7-0_ThingWorx-Extension-SDK-9-7-0/\")",
+      "Read(//c/Users/dswint/Downloads/MED-61098-CD-097_9-7-0_ThingWorx-Extension-SDK-9-7-0/**)",
+      "Bash(jar tf *)",
+      "PowerShell([xml]\\(Get-Content \"C:\\\\Users\\\\dswint\\\\OneDrive - PTC\\\\Documents\\\\FTPWidget\\\\metadata.xml\"\\); Write-Host \"XML is valid\")"
+    ],
+    "additionalDirectories": [
+      "c:\\Users\\dswint\\OneDrive - PTC\\Documents\\FTPWidget\\docs\\superpowers"
+    ]
+  }
+}
