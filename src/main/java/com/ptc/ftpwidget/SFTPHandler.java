@@ -27,7 +27,7 @@ public class SFTPHandler implements IFTPHandler {
 
     private void close(ChannelSftp channel, Session session) {
         if (channel != null && channel.isConnected()) {
-            try { channel.exit(); } catch (Exception ignored) {}
+            try { channel.disconnect(); } catch (Exception ignored) {}
         }
         if (session != null && session.isConnected()) {
             try { session.disconnect(); } catch (Exception ignored) {}
@@ -46,6 +46,8 @@ public class SFTPHandler implements IFTPHandler {
             try (InputStream is = new ByteArrayInputStream(content)) {
                 channel.put(is, fileName);
             }
+        } catch (RuntimeException e) {
+            throw e;
         } catch (Exception e) {
             throw new RuntimeException(
                 "[FTPExtension] UPLOAD failed | protocol=SFTP host=" + config.host +
@@ -73,6 +75,8 @@ public class SFTPHandler implements IFTPHandler {
                 }
                 return baos.toByteArray();
             }
+        } catch (RuntimeException e) {
+            throw e;
         } catch (Exception e) {
             throw new RuntimeException(
                 "[FTPExtension] DOWNLOAD failed | protocol=SFTP host=" + config.host +
@@ -103,6 +107,8 @@ public class SFTPHandler implements IFTPHandler {
                 }
             }
             return result;
+        } catch (RuntimeException e) {
+            throw e;
         } catch (Exception e) {
             throw new RuntimeException(
                 "[FTPExtension] LIST failed | protocol=SFTP host=" + config.host +

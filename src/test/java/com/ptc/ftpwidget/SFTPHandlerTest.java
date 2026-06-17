@@ -93,4 +93,21 @@ public class SFTPHandlerTest {
         ConnectionConfig bad = new ConnectionConfig("localhost", port, "user", "wrongpass", "SFTP", false, 5000);
         new SFTPHandler(bad).upload("/", "fail.txt", new byte[]{1});
     }
+
+    @Test
+    public void listDirectoryReturnsFileSizes() throws Exception {
+        Files.write(tempDir.resolve("sized.bin"), new byte[256]);
+
+        List<FileInfo> files = new SFTPHandler(config()).listDirectory("/");
+
+        FileInfo found = null;
+        for (FileInfo f : files) {
+            if ("sized.bin".equals(f.fileName)) {
+                found = f;
+                break;
+            }
+        }
+        assertNotNull("File sized.bin should be in listing", found);
+        assertEquals(256L, found.fileSize);
+    }
 }
