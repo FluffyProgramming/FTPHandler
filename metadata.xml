@@ -13,4 +13,13 @@
       </JARResources>
     </ExtensionPackage>
   </ExtensionPackages>
+
+  <ThingTemplates>
+    <ThingTemplate name="FTPConnection"
+                   description="FTP/FTPS/SFTP connection configuration and file transfer services"
+                   baseThingTemplate="GenericThing"
+                   className="com.ptc.ftpwidget.FTPConnectionThing"
+                   documentationContent="">
+    </ThingTemplate>
+  </ThingTemplates>
 </Entities>
