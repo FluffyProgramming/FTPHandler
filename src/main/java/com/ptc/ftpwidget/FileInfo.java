@@ -10,6 +10,6 @@ public final class FileInfo {
     public FileInfo(String fileName, long fileSize, Date lastModified) {
         this.fileName = fileName;
         this.fileSize = fileSize;
-        this.lastModified = lastModified;
+        this.lastModified = lastModified == null ? null : new Date(lastModified.getTime());
     }
 }
