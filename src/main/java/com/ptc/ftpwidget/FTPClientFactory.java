@@ -2,6 +2,8 @@ package com.ptc.ftpwidget;
 
 public class FTPClientFactory {
 
+    private FTPClientFactory() {}
+
     public static IFTPHandler create(ConnectionConfig config) {
         switch (config.protocol) {
             case "FTP":
