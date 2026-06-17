@@ -96,15 +96,15 @@ public class FTPConnectionThing extends Thing {
         @ThingworxServiceParameter(name = "repositoryPath", description = "File path within the Repository", baseType = "STRING", aspects = {"isRequired:false"}) String repositoryPath
     ) throws Exception {
         ConnectionConfig config = readConfig();
-        byte[] content = fileContent;
-        if (content == null || content.length == 0) {
-            if (isEmpty(repositoryName) || isEmpty(repositoryPath)) {
-                throw new RuntimeException(
-                    "[FTPExtension] UploadFile requires either fileContent or both repositoryName and repositoryPath.");
-            }
-            content = readFromRepository(repositoryName, repositoryPath);
-        }
         try {
+            byte[] content = fileContent;
+            if (content == null || content.length == 0) {
+                if (isEmpty(repositoryName) || isEmpty(repositoryPath)) {
+                    throw new RuntimeException(
+                        "[FTPExtension] UploadFile requires either fileContent or both repositoryName and repositoryPath.");
+                }
+                content = readFromRepository(repositoryName, repositoryPath);
+            }
             FTPClientFactory.create(config).upload(remotePath, fileName, content);
         } catch (RuntimeException e) {
             logger.error(e.getMessage(), e);
