@@ -5,6 +5,7 @@ import org.apache.commons.net.ftp.FTPSClient;
 
 import java.io.*;
 import java.util.*;
+import java.util.Date;
 
 public class FTPHandler implements IFTPHandler {
 
@@ -103,14 +104,17 @@ public class FTPHandler implements IFTPHandler {
         try {
             client = connect();
             FTPFile[] ftpFiles = client.listFiles(remotePath);
+            if (ftpFiles == null) {
+                throw new RuntimeException(
+                    "[FTPExtension] LIST failed | protocol=" + config.protocol +
+                    " host=" + config.host + " path=" + remotePath +
+                    " | listFiles returned null (server error or parse failure)");
+            }
             List<FileInfo> result = new ArrayList<>();
             for (FTPFile f : ftpFiles) {
                 if (f.isFile()) {
-                    result.add(new FileInfo(
-                        f.getName(),
-                        f.getSize(),
-                        f.getTimestamp().getTime()
-                    ));
+                    Date timestamp = f.getTimestamp() != null ? f.getTimestamp().getTime() : null;
+                    result.add(new FileInfo(f.getName(), f.getSize(), timestamp));
                 }
             }
             return result;

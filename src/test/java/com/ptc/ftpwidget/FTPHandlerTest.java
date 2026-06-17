@@ -103,4 +103,11 @@ public class FTPHandlerTest {
         ConnectionConfig bad = new ConnectionConfig("localhost", port, "user", "wrongpass", "FTP", true, 5000);
         new FTPHandler(bad).upload("/files", "fail.txt", new byte[]{1});
     }
+
+    @Test
+    public void listDirectoryOnEmptyDirectoryReturnsEmptyList() throws Exception {
+        List<FileInfo> files = new FTPHandler(config()).listDirectory("/files");
+        assertNotNull(files);
+        assertTrue(files.isEmpty());
+    }
 }
