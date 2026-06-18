@@ -15,7 +15,6 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
-@ThingworxBaseTemplateDefinition(name = "GenericThing")
 @ThingworxConfigurationTableDefinitions(tables = {
     @ThingworxConfigurationTableDefinition(
         name = "ConnectionSettings",

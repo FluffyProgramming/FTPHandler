@@ -3,7 +3,8 @@ plugins {
 }
 
 group = 'com.ptc'
-version = '1.0.0'
+version = '1.1.0'
+archivesBaseName = 'FTPHandler'
 sourceCompatibility = '1.8'
 targetCompatibility = '1.8'
 
@@ -27,12 +28,12 @@ dependencies {
 }
 
 task buildExtension(type: Zip, dependsOn: jar) {
-    archiveFileName = "FTPWidget-${project.version}.zip"
+    archiveFileName = "FTPHandler-${project.version}.zip"
     destinationDirectory = file("$buildDir/extension")
 
     from('metadata.xml')
 
-    into('lib') {
+    into('lib/common') {
         from configurations.runtimeClasspath.filter { file ->
             !file.name.startsWith('slf4j-api') &&
             !file.name.startsWith('slf4j-simple')

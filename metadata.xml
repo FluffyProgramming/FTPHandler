@@ -1,25 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Entities>
   <ExtensionPackages>
-    <ExtensionPackage name="FTPWidgetExtension"
+    <ExtensionPackage name="FTPHandler"
                       description="FTP/FTPS/SFTP file transfer extension for ThingWorx"
-                      vendor="PTC"
-                      packageVersion="1.0.0"
+                      vendor="Derrick Swint"
+                      packageVersion="1.1.0"
                       minimumThingWorxVersion="8.0.0">
-      <JARResources>
-        <FileResource type="JAR" file="lib/FTPWidget-1.0.0.jar"/>
-        <FileResource type="JAR" file="lib/commons-net-3.9.0.jar"/>
-        <FileResource type="JAR" file="lib/jsch-0.1.55.jar"/>
-      </JARResources>
+      <JarResources>
+        <FileResource type="JAR" file="FTPHandler-1.1.0.jar"/>
+        <FileResource type="JAR" file="commons-net-3.9.0.jar"/>
+        <FileResource type="JAR" file="jsch-0.1.55.jar"/>
+      </JarResources>
     </ExtensionPackage>
   </ExtensionPackages>
 
+  <ThingPackages>
+    <ThingPackage name="FTPConnectionThing"
+                  description="FTP/FTPS/SFTP connection configuration and file transfer services"
+                  className="com.ptc.ftpwidget.FTPConnectionThing"
+                  aspect.isSystemObject="false"
+                  aspect.isCreatable="true"/>
+  </ThingPackages>
+
   <ThingTemplates>
-    <ThingTemplate name="FTPConnection"
+    <ThingTemplate name="FTPConnectionTemplate"
                    description="FTP/FTPS/SFTP connection configuration and file transfer services"
-                   baseThingTemplate="GenericThing"
-                   className="com.ptc.ftpwidget.FTPConnectionThing"
-                   documentationContent="">
+                   thingPackage="FTPConnectionThing"
+                   aspect.isSystemObject="false">
     </ThingTemplate>
   </ThingTemplates>
+
 </Entities>
