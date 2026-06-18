@@ -130,4 +130,4 @@ Requirements: JDK 8+, Gradle
 
 ## Author
 
-Derrick Swint — independently developed and supported, not affiliated with PTC.
+Derrick Swint — independently developed and supported, not affiliated with Velotic.
