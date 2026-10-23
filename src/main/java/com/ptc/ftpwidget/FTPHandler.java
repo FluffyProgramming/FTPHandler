@@ -17,9 +17,9 @@ public class FTPHandler implements IFTPHandler {
 
     private FTPClient connect() throws Exception {
         FTPClient client;
+        boolean implicitTLS = (config.port == 990);
         if ("FTPS".equals(config.protocol)) {
-            boolean implicit = (config.port == 990);
-            client = new FTPSClient(implicit);
+            client = new FTPSClient(implicitTLS);
         } else {
             client = new FTPClient();
         }
@@ -28,17 +28,39 @@ public class FTPHandler implements IFTPHandler {
         client.connect(config.host, config.port);
 
         if (!FTPReply.isPositiveCompletion(client.getReplyCode())) {
+            String reply = client.getReplyString();
             client.disconnect();
             throw new RuntimeException(
                 "[FTPExtension] Connection refused | protocol=" + config.protocol +
-                " host=" + config.host + " | reply=" + client.getReplyString().trim());
+                " host=" + config.host + " | reply=" + (reply != null ? reply.trim() : "(no reply)"));
+        }
+
+        if (client instanceof FTPSClient && !implicitTLS) {
+            try {
+                ((FTPSClient) client).execAUTH("TLS");
+            } catch (Exception e) {
+                String reply = client.getReplyString();
+                client.disconnect();
+                throw new RuntimeException(
+                    "[FTPExtension] AUTH TLS failed | protocol=" + config.protocol +
+                    " host=" + config.host +
+                    " | " + (reply != null ? reply.trim() : e.getMessage()));
+            }
         }
 
         if (!client.login(config.username, config.password)) {
+            String reply = client.getReplyString();
             client.disconnect();
             throw new RuntimeException(
                 "[FTPExtension] Login failed | protocol=" + config.protocol +
-                " host=" + config.host + " user=" + config.username);
+                " host=" + config.host + " user=" + config.username +
+                " | " + (reply != null ? reply.trim() : "(no reply)"));
+        }
+
+        if (client instanceof FTPSClient) {
+            FTPSClient ftps = (FTPSClient) client;
+            ftps.execPBSZ(0);
+            ftps.execPROT("P");
         }
 
         if (config.passiveMode) {

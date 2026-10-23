@@ -4,10 +4,10 @@
     <ExtensionPackage name="FTPHandler"
                       description="FTP/FTPS/SFTP file transfer extension for ThingWorx"
                       vendor="Derrick Swint"
-                      packageVersion="1.1.0"
+                      packageVersion="1.1.3"
                       minimumThingWorxVersion="8.0.0">
       <JarResources>
-        <FileResource type="JAR" file="FTPHandler-1.1.0.jar"/>
+        <FileResource type="JAR" file="FTPHandler-1.1.3.jar"/>
         <FileResource type="JAR" file="commons-net-3.9.0.jar"/>
         <FileResource type="JAR" file="jsch-0.1.55.jar"/>
       </JarResources>
